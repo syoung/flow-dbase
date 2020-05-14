@@ -686,7 +686,7 @@ method queryhasharray ($query) {
     my $hasharray;
 
     #### GET FIELDS 
-  my ($fieldstring) = $query =~ /^SELECT\s+(.+)\s+FROM/ims;
+  my ($fieldstring) = $query =~ /^SELECT\s+(.+?)\s+FROM/ims;
     # $self->logDebug("fieldstring", $fieldstring);
   #$fieldstring =~ s/\s+//g;
   $fieldstring =~ s/DISTINCT//ms;
@@ -701,6 +701,7 @@ method queryhasharray ($query) {
       $fields = $self->fields($table);
   }
   else {
+      $fieldstring =~ s/\s+//g;
       @$fields = split ",", $fieldstring;
   }
 
